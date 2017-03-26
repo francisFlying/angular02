@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div ng-app="app">
+        <div ng-controller="parent">
+            <button ng-click="trans()">parent</button>
+            <div ng-controller="child"></div>
+        </div>
+    </div>
+</body>
+<script src="angular.js"></script>
+<script>
+    var app=angular.module("app",[]);
+    app.controller("parent",function($scope){
+        $scope.trans=function(){
+            $scope.$broadcast("ptc","ptc");
+        }
+    });
+    app.controller("child",function($scope){
+        $scope.$on("ptc",function(e,d){
+            console.log(d);
+        })
+    })
+</script>
+</html>
